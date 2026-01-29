@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Guardian Properties | Professional Management</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-blue: #0A2647;    /* Deep Navy */
+            --secondary-blue: #144272;  /* Lighter Navy */
+            --accent-blue: #205295;     /* Bright Blue */
+            --highlight: #2C74B3;       /* Light Blue */
+            --white: #ffffff;
+            --light-gray: #f4f6f8;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --success: #27ae60;
+            --whatsapp: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        a { text-decoration: none; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding { padding: 80px 0; }
+        .bg-light { background-color: var(--light-gray); }
+        .text-center { text-align: center; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+        .btn-primary:hover { background-color: var(--secondary-blue); }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+        .btn-outline:hover { background-color: var(--white); color: var(--primary-blue); }
+
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header p { color: var(--text-light); max-width: 600px; margin: 0 auto; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: var(--primary-blue); font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--highlight); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(10, 38, 71, 0.8), rgba(10, 38, 71, 0.7)), url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* --- STATS BAR --- */
+        .stats-bar {
+            background-color: var(--accent-blue);
+            color: var(--white);
+            padding: 40px 0;
+            margin-top: -5px;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item h3 { color: var(--white); font-size: 2.5rem; margin-bottom: 5px; }
+        .stat-item p { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            border-radius: 8px;
+            box-shadow: 20px 20px 0 var(--light-gray);
+            height: 450px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* --- SERVICES --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-bottom: 3px solid var(--primary-blue);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--highlight);
+            margin-bottom: 20px;
+        }
+
+        /* --- PROPERTIES (PORTFOLIO) --- */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .property-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .prop-img-container {
+            position: relative;
+            height: 220px;
+        }
+
+        .prop-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .status-occupied { background-color: var(--text-light); }
+        .status-available { background-color: var(--success); }
+
+        .prop-details { padding: 20px; }
+        
+        .prop-price {
+            color: var(--highlight);
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .prop-location {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .prop-features {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        /* --- GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .gallery-item:hover { filter: brightness(0.8); }
+
+        /* --- CONTACT --- */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            background: var(--white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 8px;
+        }
+
+        .contact-info-box h3 { margin-bottom: 20px; }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .info-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            color: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        /* --- WHATSAPP FLOAT --- */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2000;
+        }
+        .whatsapp-float:hover { background-color: #1ebc57; transform: scale(1.1); }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: #aaa;
+            padding: 50px 0 20px;
+            font-size: 0.9rem;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 { color: white; margin-bottom: 20px; }
+        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li a { color: #aaa; }
+        .footer-col ul li a:hover { color: white; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .about-grid, .contact-wrapper, .gallery-grid { grid-template-columns: 1fr; }
+            .stats-grid { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-building"></i> APEX GUARDIAN
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#properties">Properties</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact" class="btn btn-primary" style="color: white;">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <h1>Professional Property <br>Management You Can Trust</h1>
+            <p>We protect your asset, manage your tenants, and ensure consistent returns on your real estate investment in Lagos.</p>
+            <div style="margin-top: 30px;">
+                <a href="#contact" class="btn btn-primary">Call Now</a>
+                <a href="#properties" class="btn btn-outline" style="margin-left: 10px;">View Properties</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>7+</h3>
+                    <p>Years Experience</p>
+                </div>
+                <div class="stat-item">
+                    <h3>20+</h3>
+                    <p>Properties Managed</p>
+                </div>
+                <div class="stat-item">
+                    <h3>98%</h3>
+                    <p>Occupancy Rate</p>
+                </div>
+                <div class="stat-item">
+                    <h3>100%</h3>
+                    <p>Transparent</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h4>ABOUT US</h4>
+                    <h2 style="margin-bottom: 20px;">Your Local Real Estate Partner</h2>
+                    <p style="margin-bottom: 15px;">Apex Guardian Properties was founded with a single mission: to eliminate the stress of property ownership for landlords in Nigeria.</p>
+                    <p style="margin-bottom: 15px;">Led by <strong>Snazzy Apuchicat</strong>, a seasoned estate manager with over 7 years of operational experience, we bridge the gap between property owners and high-quality tenants.</p>
+                    <p>We believe in integrity, timely reporting, and proactive maintenance. We treat every property as if it were our own.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Chinedu Okeke - Property Manager" class="about-img">
+                    <p class="text-center" style="margin-top: 10px; font-weight: 600; color: var(--primary-blue);">Snazzy Apuchicat, Lead Manager</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive solutions designed to maximize your ROI.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-search service-icon"></i>
+                    <h3>Tenant Sourcing</h3>
+                    <p>We don't just find tenants; we find the <em>right</em> tenants through rigorous background and employment checks.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-file-invoice-dollar service-icon"></i>
+                    <h3>Rent Collection</h3>
+                    <p>Seamless automated rent collection and remittance systems. Zero tolerance for late payments.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tools service-icon"></i>
+                    <h3>Maintenance</h3>
+                    <p>Coordination of repairs, renovations, and routine inspections using our network of trusted artisans.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-balance-scale service-icon"></i>
+                    <h3>Lease Management</h3>
+                    <p>Drafting and enforcing legally binding tenancy agreements compliant with Lagos State Laws.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bullhorn service-icon"></i>
+                    <h3>Property Marketing</h3>
+                    <p>Professional photography and listing syndication to minimize vacancy periods.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-clipboard-check service-icon"></i>
+                    <h3>Inspections</h3>
+                    <p>Quarterly property inspections with detailed photo reports sent directly to your email.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="properties" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Managed Portfolio</h2>
+                <p>A selection of properties we currently manage or have available for lease.</p>
+            </div>
+            
+            <div class="properties-grid">
+                <div class="property-card">
+                    <div class="prop-img-container">
+                        <span class="status-badge status-available">AVAILABLE</span>
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="House in Lekki">
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">₦4,500,000 /yr</div>
+                        <h3>The Quartz Villa</h3>
+                        <div class="prop-location"><i class="fas fa-map-marker-alt"></i> Lekki Phase 1, Lagos</div>
+                        <div class="prop-features">
+                            <span><i class="fas fa-bed"></i> 4 Bed</span>
+                            <span><i class="fas fa-bath"></i> 4 Bath</span>
+                            <span>Duplex</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="prop-img-container">
+                        <span class="status-badge status-occupied">MANAGED</span>
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Apartment in VI">
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">₦7,000,000 /yr</div>
+                        <h3>Oceanview Heights</h3>
+                        <div class="prop-location"><i class="fas fa-map-marker-alt"></i> Victoria Island, Lagos</div>
+                        <div class="prop-features">
+                            <span><i class="fas fa-bed"></i> 3 Bed</span>
+                            <span><i class="fas fa-bath"></i> 3 Bath</span>
+                            <span>Flat</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="prop-img-container">
+                        <span class="status-badge status-occupied">MANAGED</span>
+                        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="House in Ikeja">
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">₦3,200,000 /yr</div>
+                        <h3>Greenwood Estate</h3>
+                        <div class="prop-location"><i class="fas fa-map-marker-alt"></i> Ikeja GRA, Lagos</div>
+                        <div class="prop-features">
+                            <span><i class="fas fa-bed"></i> 3 Bed</span>
+                            <span><i class="fas fa-bath"></i> 2 Bath</span>
+                            <span>Bungalow</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="prop-img-container">
+                        <span class="status-badge status-available">AVAILABLE</span>
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Terrace">
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">₦5,500,000 /yr</div>
+                        <h3>Royal Terraces</h3>
+                        <div class="prop-location"><i class="fas fa-map-marker-alt"></i> Ikoyi, Lagos</div>
+                        <div class="prop-features">
+                            <span><i class="fas fa-bed"></i> 4 Bed</span>
+                            <span><i class="fas fa-bath"></i> 4 Bath</span>
+                            <span>Terrace</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="prop-img-container">
+                        <span class="status-badge status-occupied">MANAGED</span>
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Condo">
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">₦2,800,000 /yr</div>
+                        <h3>Sunrise Court</h3>
+                        <div class="prop-location"><i class="fas fa-map-marker-alt"></i> Yaba, Lagos</div>
+                        <div class="prop-features">
+                            <span><i class="fas fa-bed"></i> 2 Bed</span>
+                            <span><i class="fas fa-bath"></i> 2 Bath</span>
+                            <span>Apartment</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="prop-img-container">
+                        <span class="status-badge status-occupied">MANAGED</span>
+                        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Office Block">
+                    </div>
+                    <div class="prop-details">
+                        <div class="prop-price">POA</div>
+                        <h3>Apex Commercial Hub</h3>
+                        <div class="prop-location"><i class="fas fa-map-marker-alt"></i> Marina, Lagos</div>
+                        <div class="prop-features">
+                            <span>Office</span>
+                            <span>Commercial</span>
+                            <span>5 Floors</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <div class="container text-center">
+            <h2 class="section-header">Client Reviews</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <p style="font-style: italic;">"Chinedu has been managing my two duplexes in Lekki while I live in Canada. The transparency is unmatched."</p>
+                    <h4 style="margin-top: 15px; font-size: 1rem;">- Dr. Tunde B.</h4>
+                </div>
+                <div class="service-card">
+                    <p style="font-style: italic;">"Professional, prompt, and reliable. Apex Guardian took the stress out of dealing with difficult tenants."</p>
+                    <h4 style="margin-top: 15px; font-size: 1rem;">- Mrs. Sarah A.</h4>
+                </div>
+                <div class="service-card">
+                    <p style="font-style: italic;">"The best property management decision I made. My properties are always well maintained."</p>
+                    <h4 style="margin-top: 15px; font-size: 1rem;">- Alhaji Ibrahim</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Inspection Gallery</h2>
+                <p>A look at the standards we maintain across our portfolio.</p>
+            </div>
+            <div class="gallery-grid">
+                <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1584622050111-993a426fbf0a?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="gallery-item">
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Contact Us</h2>
+                <p>Ready to discuss your property needs?</p>
+            </div>
+            <div class="contact-wrapper">
+                <div class="contact-form-box">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" placeholder="How can we help?"></textarea>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-info-box">
+                    <h3>Get In Touch</h3>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <strong>Head Office:</strong><br>
+                            15 Admiralty Way, Lekki Phase 1, Lagos
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <strong>Phone:</strong><br>
+                            +234 800 123 4567
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <strong>Email:</strong><br>
+                            inquiry@apexguardian.ng
+                        </div>
+                    </div>
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marked-alt fa-2x"></i> &nbsp; Google Map Placeholder
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Apex Guardian</h4>
+                    <p>Premier property management services ensuring peace of mind for landlords and quality living for tenants.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#properties">Properties</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Tenancy Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center" style="border-top: 1px solid #444; padding-top: 20px;">
+                <p>&copy; 2024 Apex Guardian Properties. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/2348000000000" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
